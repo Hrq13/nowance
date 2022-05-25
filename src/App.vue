@@ -14,7 +14,7 @@
 import { RouterLink, RouterView } from "vue-router";
 </script>
 
-<style>
+<style lang="scss">
 @import "@/assets/normalize.css";
 
 #app {
