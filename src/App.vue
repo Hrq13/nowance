@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
 
 <style lang="scss">
 @import "@/assets/normalize.css";
+@import "@/assets/global.scss";
 
 #app {
   max-width: 1280px;
