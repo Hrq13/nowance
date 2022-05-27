@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-4 w-50" style="max-width: 600px">
+  <div class="card p-4 w-50">
     <form @submit.prevent="tryToLogin">
       <div class="mb-3">
         <label for="login-email" class="form-label">Email</label>
