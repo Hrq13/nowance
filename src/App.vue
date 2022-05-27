@@ -1,31 +1,34 @@
 <template>
   <header>
-    <NavBar :links="links" />
+    <NavBar :links="navBarLinks" />
   </header>
 
-  <router-view />
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <script setup lang="ts">
 import NavBar from "@/components/NavBar.vue";
 import type { Link as NavBarLink } from "@/types/NavBar.types";
 
-const links: NavBarLink[] = [
+const navBarLinks: NavBarLink[] = [
   {
     label: "Dashboards",
-    path: "/dashboards",
+    path: { name: "dashboards" },
   },
   {
     label: "Create transaction",
-    path: "/transaction/create",
+    path: { name: "create-transaction" },
+  },
+  {
+    label: "See history",
+    path: { name: "history" },
   },
 ];
 </script>
 
-<style lang="scss">
-@import "@/assets/normalize.css";
-@import "@/assets/global.scss";
-
+<style lang="scss" scoped>
 header {
   display: block;
   width: 100%;
