@@ -14,7 +14,7 @@ import type { Link as NavBarLink } from "@/types/NavBar.types";
 
 const navBarLinks: NavBarLink[] = [
   {
-    label: "Dashboards",
+    label: "Dashboard",
     path: { name: "dashboards" },
   },
   {
