@@ -2,6 +2,12 @@
   <table
     :class="`table table-hover table-${props.theme} table-sm mb-0 align-baseline`"
   >
+    <caption>
+      {{
+        props.caption
+      }}
+    </caption>
+
     <thead v-show="showHead">
       <tr>
         <th v-if="props.enumerate" scope="col" class="col-1">#</th>
@@ -67,6 +73,10 @@ const props = defineProps({
   showHead: {
     type: Boolean,
     default: true,
+  },
+  caption: {
+    type: String,
+    required: true,
   },
 });
 
