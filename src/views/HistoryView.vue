@@ -1,10 +1,38 @@
 <template>
-  <main>
-    <h1>HISTORY</h1>
-  </main>
+  <h1>HISTORY</h1>
+
+  <table-vue
+    :content-data="transactions"
+    :mapped-data="{
+      Title: 'title',
+      Description: 'description',
+      Type: 'type',
+      Category: 'category',
+      Value: 'value',
+      Date: 'updatedAt',
+    }"
+    theme="warning"
+  />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TableVue from "@/components/TableVue.vue";
+
+const transactions = [
+  {
+    title: "teste 1",
+    description: "description 1",
+    type: "type 1",
+    category: "category 1",
+    value: 15.45,
+    updatedAt: new Date().toLocaleString("pt-br", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    }),
+  },
+];
+</script>
 
 <style lang="scss" scoped>
 h1 {
