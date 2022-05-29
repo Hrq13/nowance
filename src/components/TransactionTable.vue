@@ -22,10 +22,10 @@
                 <button
                   class="btn btn-sm"
                   @click="logActionClick(rowData)"
+                  id="editPaymentButton"
                   ref="editPaymentButtonRef"
                   data-bs-toggle="tooltip"
-                  data-bs-html="true"
-                  title="<b>Edit this item</b>"
+                  title="Edit this item"
                 >
                   <i class="bi-gear text-white"></i>
                 </button>
@@ -57,11 +57,11 @@
               <template #actions="{ rowData }">
                 <button
                   class="btn btn-sm"
+                  id="editExpenseButton"
                   @click="logActionClick(rowData)"
                   ref="editExpenseButtonRef"
                   data-bs-toggle="tooltip"
-                  data-bs-html="true"
-                  title="<b>Edit this item</b>"
+                  title="Edit this item"
                 >
                   <i class="bi-gear text-white"></i>
                 </button>
@@ -75,9 +75,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, reactive } from "vue";
 import TableVue from "./TableVue.vue";
-import { Tooltip } from "bootstrap";
 
 const props = defineProps({
   payments: {
@@ -114,24 +113,4 @@ const currentTableDataMap = computed(() => {
 const logActionClick = (data) => {
   console.log(data.id);
 };
-
-const editPaymentButtonRef = ref(null);
-const editExpenseButtonRef = ref(null);
-
-onMounted(() => {
-  if (editPaymentButtonRef.value) new Tooltip(editPaymentButtonRef.value);
-  if (editExpenseButtonRef.value) new Tooltip(editExpenseButtonRef.value);
-});
 </script>
-
-<style lang="scss">
-.tooltip {
-  & .tooltip-inner {
-    background: var(--bs-primary);
-  }
-
-  & .tooltip-arrow:before {
-    border-top-color: var(--bs-primary);
-  }
-}
-</style>
