@@ -1,10 +1,11 @@
 <template>
-  <table :class="`table table-hover table-${props.theme}`">
-    <thead>
+  <table :class="`table table-hover table-${props.theme} table-sm mb-0`">
+    <thead v-show="showHead">
       <tr>
-        <th v-if="props.enumerate" scope="col">#</th>
+        <th v-if="props.enumerate" scope="col" class="col-1">#</th>
 
         <th
+          class="col-1"
           scope="col"
           v-for="(colLabel, index) in mappedFieldLabels"
           :key="index"
@@ -16,9 +17,16 @@
 
     <tbody>
       <tr v-for="(data, index) in props.contentData" :key="index">
-        <td v-if="props.enumerate" scope="row">{{ index + 1 }}</td>
+        <td v-if="props.enumerate" class="col-1" scope="row">
+          {{ index + 1 }}
+        </td>
 
-        <td v-for="(field, index) in mappedFieldData" scope="row" :key="index">
+        <td
+          v-for="(field, index) in mappedFieldData"
+          scope="row"
+          :key="index"
+          class="col-1"
+        >
           {{ (data as any)[field as any] }}
         </td>
       </tr>
@@ -45,6 +53,10 @@ const props = defineProps({
   enumerate: {
     type: Boolean,
     default: false,
+  },
+  showHead: {
+    type: Boolean,
+    default: true,
   },
 });
 
