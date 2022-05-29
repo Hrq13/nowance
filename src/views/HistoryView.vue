@@ -1,5 +1,13 @@
 <template>
-  <transaction-table :payments="payments" :expenses="expenses" />
+  <section class="d-flex">
+    <aside class="col-2">teste</aside>
+
+    <transaction-table
+      class="col-10"
+      :payments="payments"
+      :expenses="expenses"
+    />
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +24,6 @@ const payments = [
     updatedAt: new Date().toLocaleString("pt-br", {
       day: "2-digit",
       month: "2-digit",
-      year: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
     }),
@@ -34,7 +41,6 @@ const expenses = [
     updatedAt: new Date().toLocaleString("pt-br", {
       day: "2-digit",
       month: "2-digit",
-      year: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
     }),
