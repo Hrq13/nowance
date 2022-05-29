@@ -4,6 +4,7 @@
       <router-link class="navbar-brand" :to="{ name: 'home' }"
         >Nowance</router-link
       >
+
       <button
         class="navbar-toggler"
         type="button"
@@ -15,6 +16,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -25,6 +27,7 @@
               >Home</router-link
             >
           </li>
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -36,6 +39,7 @@
             >
               Menu
             </a>
+
             <ul
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdown"
