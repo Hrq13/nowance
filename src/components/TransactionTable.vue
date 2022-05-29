@@ -6,7 +6,13 @@
       :content-data="props.payments"
       :mapped-data="currentTableDataMap"
       theme="light"
-    />
+    >
+      <template #actions="{ rowData }">
+        <button class="btn btn-sm" @click="logActionClick(rowData)">
+          <i class="bi-gear"></i>
+        </button>
+      </template>
+    </table-vue>
 
     <h3 class="bg-secondary text-wrap text-center mb-0">Expenses</h3>
 
@@ -53,4 +59,8 @@ const currentTableDataMap = computed(() => {
 
   return props.customTableDataMap;
 });
+
+const logActionClick = (data) => {
+  console.log(data.id);
+};
 </script>

@@ -7,6 +7,7 @@ import TransactionTable from "@/components/TransactionTable.vue";
 
 const payments = [
   {
+    id: "78asd-das58d4-as5d64-a9xd6",
     title: "Salary",
     description: "Same as last month",
     type: "Debit",
@@ -24,6 +25,7 @@ const payments = [
 
 const expenses = [
   {
+    id: "d8s2-ag8w9sk-g21i7-mhg25",
     title: "Dentist",
     description: "Routine check",
     type: "Credit",

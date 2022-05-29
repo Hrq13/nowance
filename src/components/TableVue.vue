@@ -1,5 +1,7 @@
 <template>
-  <table :class="`table table-hover table-${props.theme} table-sm mb-0`">
+  <table
+    :class="`table table-hover table-${props.theme} table-sm mb-0 align-baseline`"
+  >
     <thead v-show="showHead">
       <tr>
         <th v-if="props.enumerate" scope="col" class="col-1">#</th>
@@ -12,6 +14,8 @@
         >
           {{ colLabel }}
         </th>
+
+        <td class="col-1" v-if="shouldShowActions">Actions</td>
       </tr>
     </thead>
 
@@ -29,13 +33,19 @@
         >
           {{ (data as any)[field as any] }}
         </td>
+
+        <td class="col-1" v-if="shouldShowActions">
+          <slot name="actions" v-bind="{ rowData: data }"></slot>
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script setup lang="ts">
-import { computed, type ComputedRef } from "vue";
+import { computed, type ComputedRef, useSlots } from "vue";
+
+const slots = useSlots();
 
 const props = defineProps({
   contentData: {
@@ -73,4 +83,6 @@ const mappedFieldData: ComputedRef<string[] | []> = computed(() => {
 
   return fields;
 });
+
+const shouldShowActions = computed(() => !!slots.actions);
 </script>
