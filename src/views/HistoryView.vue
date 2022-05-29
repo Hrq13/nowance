@@ -1,34 +1,40 @@
 <template>
-  <h1>HISTORY</h1>
-
-  <table-vue
-    :content-data="transactions"
-    :mapped-data="{
-      Title: 'title',
-      Description: 'description',
-      Type: 'type',
-      Category: 'category',
-      Value: 'value',
-      Date: 'updatedAt',
-    }"
-    theme="warning"
-  />
+  <transaction-table :payments="payments" :expenses="expenses" />
 </template>
 
 <script setup lang="ts">
-import TableVue from "@/components/TableVue.vue";
+import TransactionTable from "@/components/TransactionTable.vue";
 
-const transactions = [
+const payments = [
   {
-    title: "teste 1",
-    description: "description 1",
-    type: "type 1",
-    category: "category 1",
-    value: 15.45,
+    title: "Salary",
+    description: "Same as last month",
+    type: "Debit",
+    category: "Salary",
+    value: 6300,
     updatedAt: new Date().toLocaleString("pt-br", {
       day: "2-digit",
       month: "2-digit",
       year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  },
+];
+
+const expenses = [
+  {
+    title: "Dentist",
+    description: "Routine check",
+    type: "Credit",
+    category: "Health",
+    value: 320,
+    updatedAt: new Date().toLocaleString("pt-br", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
     }),
   },
 ];
