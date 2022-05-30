@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <h1>TRANSACTION VIEW</h1>
-  </main>
+  <router-view />
 </template>
 
 <script setup lang="ts"></script>

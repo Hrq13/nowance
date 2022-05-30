@@ -1,10 +1,23 @@
-type TransactionTypes = "travel" | "home" | "health" | "shopping";
+export type TransactionCategories =
+  | "travel"
+  | "home"
+  | "health"
+  | "shopping"
+  | "";
+export type TransactionPaymentTypes = "credit" | "debit" | "";
 
-export interface Transaction {
+export interface TransactionMetaData {
   id: string;
-  title: string;
-  description?: string;
-  type: TransactionTypes;
   createdAt: number;
   updatedAt?: number;
 }
+
+export interface TransactionFields {
+  title: string;
+  description?: string;
+  paymentType: TransactionPaymentTypes;
+  category: TransactionCategories;
+  value: number;
+}
+
+export interface Transaction extends TransactionMetaData, TransactionFields {}

@@ -75,6 +75,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Transaction } from "@/types/Transaction.types";
 import { computed, reactive } from "vue";
 import TableVue from "./TableVue.vue";
 
@@ -110,7 +111,7 @@ const currentTableDataMap = computed(() => {
   return props.customTableDataMap;
 });
 
-const logActionClick = (data) => {
+const logActionClick = (data: Transaction) => {
   console.log(data.id);
 };
 </script>
