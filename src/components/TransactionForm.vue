@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid m-0 p-0">
     <form class="form row">
       <div class="col-12 mb-3">
-        <div class="row flex">
+        <div class="row justify-content-center">
           <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
             <label for="transactionTitle">Title</label>
 
@@ -30,7 +30,7 @@
       </div>
 
       <div class="col-12 mb-3">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
             <label for="transactionCategory">Category</label>
 
@@ -57,7 +57,7 @@
       </div>
 
       <div class="col-12 mb-3">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-12 col-md-10 col-lg-8 mb-3 mb-sm-0">
             <label for="transactionDescription" class="form-label"
               >Description</label
@@ -74,7 +74,7 @@
       </div>
 
       <div class="col-12">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
             <button
               class="btn bg-secondary text-white d-sm-block w-100"
@@ -106,16 +106,17 @@ import type {
   TransactionFields,
 } from "@/types/Transaction.types";
 
-import { reactive, ref, type PropType } from "vue";
+import { reactive, ref, watch, type PropType } from "vue";
 import SelectVue from "./SelectVue.vue";
 import CurrencyInput from "./CurrencyInput.vue";
 
 const props = defineProps({
-  defaultValues: {
-    type: Object as PropType<Partial<TransactionFields>>,
+  modelValue: {
+    type: Object as PropType<TransactionFields>,
+    required: true,
   },
 });
-const emits = defineEmits(["reset", "submit"]);
+const emits = defineEmits(["update:modelValue", "reset", "submit"]);
 
 interface PaymentTypeOption extends SelectOption {
   value: TransactionPaymentTypes;
@@ -156,10 +157,24 @@ const paymentCategoryOptions = ref<PaymentCategoryOption[]>([
 ]);
 
 let transaction = reactive<TransactionFields>({
-  title: props.defaultValues?.title || "",
-  category: props.defaultValues?.category || "",
-  paymentType: props.defaultValues?.paymentType || "",
-  description: props.defaultValues?.description,
-  value: props.defaultValues?.value || 0,
+  title: "",
+  category: "",
+  paymentType: "",
+  description: "",
+  value: 0,
 });
+
+watch(transaction, (newValue) => {
+  emits("update:modelValue", newValue);
+});
+
+watch(
+  props.modelValue,
+  (newValue) => {
+    transaction = newValue;
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
