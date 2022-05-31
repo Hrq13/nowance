@@ -46,11 +46,10 @@
           <div class="col-12 col-sm-6 col-md-5 col-lg-4">
             <label for="transactionValue">Value</label>
 
-            <input
-              type="text"
+            <CurrencyInput
               class="form-control"
               id="transactionValue"
-              placeholder="$ 123.45"
+              placeholder="$123.45"
               v-model="transaction.value"
             />
           </div>
@@ -109,6 +108,7 @@ import type {
 
 import { reactive, ref, type PropType } from "vue";
 import SelectVue from "./SelectVue.vue";
+import CurrencyInput from "./CurrencyInput.vue";
 
 const props = defineProps({
   defaultValues: {
