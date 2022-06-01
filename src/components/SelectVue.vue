@@ -2,6 +2,7 @@
   <select
     :class="['form-select', `forms-select-${props.size}`]"
     :aria-label="props.label"
+    @change="handleChange"
   >
     <option selected disabled>
       {{ props.label }}
@@ -29,7 +30,7 @@ const props = defineProps({
   },
   options: {
     type: Array as PropType<SelectOption[]>,
-    default: () => [],
+    default: () => [] as SelectOption[],
   },
   label: {
     type: String,
@@ -41,6 +42,11 @@ const props = defineProps({
     validator: (value: string) => ["sm", "md", "lg"].includes(value),
   },
 });
+
+const emits = defineEmits(["update:modelValue"]);
+const handleChange = (e: Event) => {
+  emits("update:modelValue", (e.target as HTMLSelectElement).value);
+};
 </script>
 
 <style scoped>
