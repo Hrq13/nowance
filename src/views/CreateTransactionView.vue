@@ -7,11 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import TransactionForm from "@/components/TransactionForm.vue";
+import TransactionForm from "@/components/TransactionForm/TransactionForm.vue";
 import type { TransactionFields } from "@/types/Transaction.types";
-import { reactive } from "vue";
+import { ref } from "vue";
 
-const transaction = reactive<TransactionFields>({
+const transaction = ref<TransactionFields>({
   title: "My new transaction",
   category: "health",
   paymentType: "credit",
