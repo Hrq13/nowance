@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "@/components/NavBar/NavBar.vue";
 import type { Link as NavBarLink } from "@/types/NavBar.types";
 
 const navBarLinks: NavBarLink[] = [
