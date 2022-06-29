@@ -38,7 +38,7 @@ const props = defineProps({
 
 watch(
   () => props.modelValue,
-  () => setValue(props.modelValue)
+  (value) => setValue(value)
 );
 
 const { inputRef, setValue } = useCurrencyInput(
