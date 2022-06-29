@@ -72,10 +72,10 @@
             >
 
             <textarea
-              class="form-control w-100"
+              v-model="description"
+              class="description-field form-control w-100"
               id="transactionDescription"
               placeholder="A descriptive text for this transaction..."
-              v-model="description"
             ></textarea>
 
             <span>{{ errors["description"] }}</span>
@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, watch, type PropType } from "vue";
+import { computed, watch, type PropType } from "vue";
 import { useField, useForm, type FieldContext } from "vee-validate";
 
 import type { TransactionFields } from "@/types/transaction.types";
@@ -182,3 +182,9 @@ const onReset = () => emits("reset", resetForm);
 const paymentTypeOptions = TRANSACTION_PAYMENT_TYPES;
 const paymentCategoryOptions = TRANSACTION_CATEGORIES;
 </script>
+
+<style scoped>
+.description-field {
+  resize: none;
+}
+</style>
