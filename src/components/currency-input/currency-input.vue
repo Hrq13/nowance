@@ -1,36 +1,21 @@
 <template>
   <input
-    :class="props.customClasses"
     ref="inputRef"
     type="text"
     :placeholder="props.placeholder"
+    :class="props.customClasses"
   />
 </template>
 
 <script setup lang="ts">
+import { watch } from "vue";
 import type { PropType } from "vue";
 import {
   useCurrencyInput,
   type CurrencyInputOptions,
 } from "vue-currency-input";
 
-const currencyDefaultMask = {
-  locale: "en-US",
-  currency: "USD",
-  currencyDisplay: "symbol",
-  valueRange: {
-    min: 0,
-    max: 100000,
-  },
-  precision: 2,
-  hideCurrencySymbolOnFocus: true,
-  hideGroupingSeparatorOnFocus: false,
-  hideNegligibleDecimalDigitsOnFocus: false,
-  autoDecimalDigits: true,
-  autoSign: true,
-  useGrouping: true,
-  accountingSign: false,
-} as CurrencyInputOptions;
+import { currencyDefaultMask } from "./constants";
 
 const props = defineProps({
   modelValue: {
@@ -51,5 +36,12 @@ const props = defineProps({
   },
 });
 
-const { inputRef } = useCurrencyInput(props.options || currencyDefaultMask);
+watch(
+  () => props.modelValue,
+  () => setValue(props.modelValue)
+);
+
+const { inputRef, setValue } = useCurrencyInput(
+  props.options || currencyDefaultMask
+);
 </script>

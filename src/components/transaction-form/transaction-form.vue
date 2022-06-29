@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, type PropType } from "vue";
+import { computed, nextTick, watch, type PropType } from "vue";
 import { useField, useForm, type FieldContext } from "vee-validate";
 
 import type { TransactionFields } from "@/types/transaction.types";
@@ -131,7 +131,7 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue", "submit", "reset"]);
 
-const { handleSubmit, errors, meta } = useForm({
+const { handleSubmit, errors, meta, resetForm } = useForm({
   validationSchema: TransactionFormSchema,
   initialValues: {
     title: props.modelValue.title || "",
@@ -177,7 +177,7 @@ watch(
 );
 
 const onSubmit = handleSubmit(() => emits("submit"));
-const onReset = () => emits("reset");
+const onReset = () => emits("reset", resetForm);
 
 const paymentTypeOptions = TRANSACTION_PAYMENT_TYPES;
 const paymentCategoryOptions = TRANSACTION_CATEGORIES;

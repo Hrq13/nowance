@@ -2,7 +2,10 @@
   <div class="container mx-auto">
     <h3 class="text-sm-center d-block my-4">Create new transaction</h3>
 
-    <transaction-form v-model="transaction" />
+    <transaction-form
+      v-model="transaction"
+      @reset="(resetToInitialState) => resetToInitialState()"
+    />
   </div>
 </template>
 
@@ -15,7 +18,7 @@ const transaction = ref<TransactionFields>({
   title: "My new transaction",
   category: "health",
   paymentType: "credit",
-  value: 0,
+  value: 13,
   description: "",
 });
 </script>
