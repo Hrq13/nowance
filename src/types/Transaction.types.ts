@@ -3,6 +3,7 @@ export type TransactionCategories =
   | "home"
   | "health"
   | "shopping"
+  | "work"
   | "";
 export type TransactionPaymentTypes = "credit" | "debit" | "";
 
