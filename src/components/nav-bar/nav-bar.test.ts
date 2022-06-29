@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import router from "@/router";
 
-import NavBar from "../nav-bar.vue";
+import NavBar from "./nav-bar.vue";
 import type { Link as NavBarLink } from "@/types/nav-bar.types";
 
 const mockLinks: NavBarLink[] = [
