@@ -1,8 +1,8 @@
-import type { SelectOption } from "./SelectOptions.types";
+import type { SelectOption } from "./select-options.types";
 import type {
   TransactionCategories,
   TransactionPaymentTypes,
-} from "./Transaction.types";
+} from "./transaction.types";
 
 export interface PaymentTypeOption extends SelectOption {
   value: TransactionPaymentTypes;

@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import TransactionForm from "@/components/TransactionForm/TransactionForm.vue";
-import type { TransactionFields } from "@/types/Transaction.types";
+import TransactionForm from "@/components/transaction-form/transaction-form.vue";
+import type { TransactionFields } from "@/types/transaction.types";
 import { ref } from "vue";
 
 const transaction = ref<TransactionFields>({

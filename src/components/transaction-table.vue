@@ -75,9 +75,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Transaction } from "@/types/Transaction.types";
+import type { Transaction } from "@/types/transaction.types";
 import { computed, reactive } from "vue";
-import TableVue from "./TableVue.vue";
+import TableVue from "./table-vue.vue";
 
 const props = defineProps({
   payments: {

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import LoginForm from "@/components/LoginForm.vue";
+import LoginForm from "@/components/login-form.vue";
 import { ref } from "vue";
 
 const shouldShowRegisterForm = ref(false);

@@ -1,7 +1,7 @@
 import type {
   PaymentCategoryOption,
   PaymentTypeOption,
-} from "@/types/TransactionForm.types";
+} from "@/types/transaction-form.types";
 
 export const TRANSACTION_PAYMENT_TYPES: Array<PaymentTypeOption> = [
   {

@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import TransactionTable from "@/components/TransactionTable.vue";
+import TransactionTable from "@/components/transaction-table.vue";
 
 const payments = [
   {

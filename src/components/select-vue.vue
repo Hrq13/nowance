@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
-import type { SelectOption } from "@/types/SelectOptions.types";
+import type { SelectOption } from "@/types/select-options.types";
 
 const props = defineProps({
   modelValue: {

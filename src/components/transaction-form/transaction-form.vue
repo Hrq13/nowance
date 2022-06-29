@@ -114,14 +114,14 @@
 import { computed, watch, type PropType } from "vue";
 import { useField, useForm, type FieldContext } from "vee-validate";
 
-import type { TransactionFields } from "@/types/Transaction.types";
+import type { TransactionFields } from "@/types/transaction.types";
 
-import TransactionFormSchema from "@/utils/validation/TransactionFormSchema";
+import TransactionFormSchema from "@/utils/validation/transaction-form-schema";
 
 import { TRANSACTION_CATEGORIES, TRANSACTION_PAYMENT_TYPES } from "./constants";
 
-import CurrencyInput from "@/components/CurrencyInput.vue";
-import SelectVue from "@/components/SelectVue.vue";
+import CurrencyInput from "@/components/currency-input/currency-input.vue";
+import SelectVue from "@/components/select-vue.vue";
 
 const props = defineProps({
   modelValue: {

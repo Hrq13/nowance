@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
+import HomeView from "@/views/home-view.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,26 +12,26 @@ const router = createRouter({
     {
       path: "/login-or-register",
       name: "login",
-      component: () => import("@/views/LoginOrRegisterView.vue"),
-    },
-    {
-      path: "/dashboards",
-      name: "dashboards",
-      component: () => import("@/views/DashboardView.vue"),
+      component: () => import("@/views/login-or-register-view.vue"),
     },
     {
       path: "/transactions",
-      name: "history",
-      component: () => import("@/views/HistoryView.vue"),
-    },
-    {
-      path: "/transaction",
-      component: () => import("@/views/TransactionView.vue"),
+      component: () => import("@/layouts/primary-layout.vue"),
       children: [
         {
           path: "create",
           name: "create-transaction",
-          component: () => import("@/views/CreateTransactionView.vue"),
+          component: () => import("@/views/transaction/create-view.vue"),
+        },
+        {
+          path: "dashboards",
+          name: "dashboards",
+          component: () => import("@/views/transaction/dashboard-view.vue"),
+        },
+        {
+          path: "history",
+          name: "history",
+          component: () => import("@/views/transaction/history-view.vue"),
         },
       ],
     },

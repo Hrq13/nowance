@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Link as NavBarLink } from "@/types/NavBar.types";
+import type { Link as NavBarLink } from "@/types/nav-bar.types";
 import type { PropType } from "vue";
 
 const props = defineProps({
