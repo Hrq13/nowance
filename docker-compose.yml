@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  website:
+    build: .
+    network_mode: host
+    volumes:
+      - .:/usr/app
+    command: "npm run dev"
