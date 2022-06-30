@@ -4,7 +4,8 @@ services:
 
   website:
     build: .
-    network_mode: host
+    ports:
+      - "3000:3000"
     volumes:
       - .:/usr/app
-    command: "npm run dev"
+    command: "npm run dev -- --host 0.0.0.0"
