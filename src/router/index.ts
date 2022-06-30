@@ -17,6 +17,7 @@ const router = createRouter({
     {
       path: "/transactions",
       component: () => import("@/layouts/primary-layout.vue"),
+      redirect: { name: "home" },
       children: [
         {
           path: "create",
