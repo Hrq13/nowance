@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export type TransactionCategories =
   | "travel"
   | "home"
@@ -9,8 +11,8 @@ export type TransactionPaymentTypes = "credit" | "debit" | "";
 
 export interface TransactionMetaData {
   id: string;
-  createdAt: number;
-  updatedAt?: number;
+  created_at: Timestamp;
+  updated_at?: Timestamp;
 }
 
 export interface TransactionFields {

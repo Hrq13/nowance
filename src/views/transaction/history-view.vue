@@ -11,41 +11,27 @@
 </template>
 
 <script setup lang="ts">
+import { useTransactionStore } from "@/stores/transaction/transactionStore";
 import TransactionTable from "@/components/transaction-table.vue";
+import { ref } from "vue";
+import type { Transaction } from "@/types/transaction.types";
 
-const payments = [
-  {
-    id: "78asd-das58d4-as5d64-a9xd6",
-    title: "Salary",
-    description: "Same as last month",
-    type: "Debit",
-    category: "Salary",
-    value: 6300,
-    updatedAt: new Date().toLocaleString("pt-br", {
-      day: "2-digit",
-      month: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-  },
-];
+const transactionStore = useTransactionStore();
 
-const expenses = [
-  {
-    id: "d8s2-ag8w9sk-g21i7-mhg25",
-    title: "Dentist",
-    description: "Routine check",
-    type: "Credit",
-    category: "Health",
-    value: 320,
-    updatedAt: new Date().toLocaleString("pt-br", {
-      day: "2-digit",
-      month: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-  },
-];
+const payments = ref([] as Transaction[]);
+const expenses = ref([] as Transaction[]);
+
+transactionStore.$onAction(({ name, after, store }) => {
+  if (name === "fetchTransactions") {
+    after(() => {
+      console.log("teste");
+      payments.value = store.payments;
+      expenses.value = store.expenses;
+    });
+  }
+});
+
+transactionStore.fetchTransactions();
 </script>
 
 <style lang="scss" scoped>
