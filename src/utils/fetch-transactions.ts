@@ -6,7 +6,11 @@ import {
   query,
 } from "firebase/firestore";
 
-import type { Transaction } from "@/types/transaction.types";
+import type {
+  RawTransactionFromFirestore,
+  Transaction,
+} from "@/types/transaction.types";
+import normalizeTransaction from "./normalize-transaction";
 
 export async function fetchTransactionsOfRef(
   ref: CollectionReference<DocumentData>
@@ -18,10 +22,10 @@ export async function fetchTransactionsOfRef(
       const fetchedTransactions: Transaction[] = [];
 
       querySnapshot.forEach((transaction) => {
-        const parsedTransaction = {
+        const parsedTransaction = normalizeTransaction({
           id: transaction.id,
           ...transaction.data(),
-        } as Transaction;
+        } as RawTransactionFromFirestore);
 
         fetchedTransactions.push(parsedTransaction);
       });

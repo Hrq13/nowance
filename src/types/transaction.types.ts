@@ -11,16 +11,22 @@ export type TransactionPaymentTypes = "credit" | "debit" | "";
 
 export interface TransactionMetaData {
   id: string;
-  created_at: Timestamp;
-  updated_at?: Timestamp;
+  created_at: number;
+  updated_at?: number;
 }
 
 export interface TransactionFields {
   title: string;
   description?: string;
-  paymentType: TransactionPaymentTypes;
+  payment_type: TransactionPaymentTypes;
   category: TransactionCategories;
   value: number;
 }
+
+export type RawTransactionFromFirestore = Transaction & {
+  created_at: Timestamp;
+  updated_at: Timestamp;
+  value: string;
+};
 
 export interface Transaction extends TransactionMetaData, TransactionFields {}

@@ -24,7 +24,6 @@ const expenses = ref([] as Transaction[]);
 transactionStore.$onAction(({ name, after, store }) => {
   if (name === "fetchTransactions") {
     after(() => {
-      console.log("teste");
       payments.value = store.payments;
       expenses.value = store.expenses;
     });
