@@ -79,7 +79,7 @@
 <script setup lang="ts">
 import type { Transaction } from "@/types/transaction.types";
 import formatCurrencyData from "@/utils/format-currency-data";
-import millisecondsToDate from "@/utils/millisecondsToDate";
+import millisecondsToDate from "@/utils/milliseconds-to-date";
 import { computed, reactive, type PropType } from "vue";
 import TableVue from "./table-vue.vue";
 
