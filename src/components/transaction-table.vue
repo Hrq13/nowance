@@ -17,11 +17,12 @@
               :mapped-data="currentTableDataMap"
               theme="dark"
               caption="All your payments will appear here"
+              :data-masks="dataMasks"
             >
               <template #actions="{ rowData }">
                 <button
                   class="btn btn-sm"
-                  @click="logActionClick(rowData)"
+                  @click="logActionClick((rowData) as Transaction)"
                   id="editPaymentButton"
                   ref="editPaymentButtonRef"
                   data-bs-toggle="tooltip"
@@ -53,12 +54,13 @@
               :mapped-data="currentTableDataMap"
               theme="dark"
               caption="All your expenses will appear here"
+              :data-masks="dataMasks"
             >
               <template #actions="{ rowData }">
                 <button
                   class="btn btn-sm"
                   id="editExpenseButton"
-                  @click="logActionClick(rowData)"
+                  @click="logActionClick((rowData) as Transaction)"
                   ref="editExpenseButtonRef"
                   data-bs-toggle="tooltip"
                   title="Edit this item"
@@ -76,16 +78,18 @@
 
 <script setup lang="ts">
 import type { Transaction } from "@/types/transaction.types";
-import { computed, reactive } from "vue";
+import formatCurrencyData from "@/utils/format-currency-data";
+import millisecondsToDate from "@/utils/millisecondsToDate";
+import { computed, reactive, type PropType } from "vue";
 import TableVue from "./table-vue.vue";
 
 const props = defineProps({
   payments: {
-    type: Array,
+    type: Array as PropType<Transaction[]>,
     default: () => [],
   },
   expenses: {
-    type: Array,
+    type: Array as PropType<Transaction[]>,
     default: () => [],
   },
   customTableDataMap: {
@@ -97,11 +101,16 @@ const props = defineProps({
 const defaultTableDataMap = reactive({
   Title: "title",
   Description: "description",
-  Type: "type",
+  Type: "payment_type",
   Category: "category",
   Value: "value",
-  Date: "updatedAt",
+  Date: "updated_at",
 });
+
+const dataMasks = {
+  value: formatCurrencyData,
+  updated_at: millisecondsToDate,
+};
 
 const currentTableDataMap = computed(() => {
   if (!Object.keys(props.customTableDataMap).length) {
@@ -112,6 +121,6 @@ const currentTableDataMap = computed(() => {
 });
 
 const logActionClick = (data: Transaction) => {
-  console.log(data.id);
+  console.log({ data });
 };
 </script>

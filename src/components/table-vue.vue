@@ -37,7 +37,11 @@
           :key="index"
           class="col-1"
         >
-          {{ (data as any)[field as any] }}
+          {{
+            props.dataMasks[field as any]
+              ? (props.dataMasks[field] as CallableFunction)((data as any)[field])
+              : (data as any)[field]
+          }}
         </td>
 
         <td class="col-1" v-if="shouldShowActions">
@@ -49,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type ComputedRef, useSlots } from "vue";
+import { computed, type ComputedRef, useSlots, type PropType } from "vue";
 
 const slots = useSlots();
 
@@ -78,6 +82,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  dataMasks: {
+    type: Object as PropType<{
+      [key: string]: CallableFunction | undefined;
+    }>,
+    default: () => ({}),
+  },
 });
 
 const mappedFieldLabels: ComputedRef<string[] | []> = computed(() => {
@@ -88,7 +98,7 @@ const mappedFieldData: ComputedRef<string[] | []> = computed(() => {
   const fields = [];
 
   for (const field of mappedFieldLabels.value) {
-    fields.push(props.mappedData[`${field}`]);
+    fields.push(props.mappedData[field]);
   }
 
   return fields;
