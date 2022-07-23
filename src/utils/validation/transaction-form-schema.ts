@@ -1,7 +1,7 @@
 import type {
   TransactionCategories,
   TransactionPaymentTypes,
-} from "@/types/Transaction.types";
+} from "@/types/transaction.types";
 import { string, number, object } from "yup";
 
 const allowedPaymentTypes: Array<TransactionPaymentTypes> = ["credit", "debit"];
@@ -14,7 +14,7 @@ const allowedCategories: Array<TransactionCategories> = [
 
 const schema = object({
   title: string().required().min(3).max(15),
-  paymentType: string().required().oneOf(allowedPaymentTypes),
+  payment_type: string().required().oneOf(allowedPaymentTypes),
   category: string().required().oneOf(allowedCategories),
   value: number().required().min(1).max(100000),
   description: string().notRequired().max(35),

@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid m-0 p-0">
     <form class="form row" @submit="onSubmit" @reset.prevent="onReset">
-      <div class="col-12 mb-3">
+      <div class="col-12">
         <div class="row justify-content-center">
-          <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
+          <div class="col-12 col-sm-6">
             <label for="transactionTitle">Title</label>
 
             <input
@@ -17,25 +17,25 @@
             <span>{{ errors["title"] }}</span>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+          <div class="col-12 col-sm-6">
             <label for="transactionType">Type</label>
 
             <select-vue
-              v-model="paymentType"
+              v-model="payment_type"
               id="transactionType"
               :options="paymentTypeOptions"
               label="Select type"
               size="lg"
             />
 
-            <span>{{ errors["paymentType"] }}</span>
+            <span>{{ errors["payment_type"] }}</span>
           </div>
         </div>
       </div>
 
       <div class="col-12 mb-3">
         <div class="row justify-content-center">
-          <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
+          <div class="col-12 col-sm-6">
             <label for="transactionCategory">Category</label>
 
             <select-vue
@@ -49,7 +49,7 @@
             <span>{{ errors["category"] }}</span>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+          <div class="col-12 col-sm-6">
             <label for="transactionValue">Value</label>
 
             <CurrencyInput
@@ -66,7 +66,7 @@
 
       <div class="col-12 mb-3">
         <div class="row justify-content-center">
-          <div class="col-12 col-md-10 col-lg-8 mb-3 mb-sm-0">
+          <div class="col-12">
             <label for="transactionDescription" class="form-label"
               >Description</label
             >
@@ -85,7 +85,7 @@
 
       <div class="col-12">
         <div class="row justify-content-center">
-          <div class="col-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
+          <div class="col-6">
             <button
               class="btn bg-danger text-white d-sm-block w-100"
               type="reset"
@@ -95,7 +95,7 @@
             </button>
           </div>
 
-          <div class="col-6 col-md-5 col-lg-4">
+          <div class="col-6">
             <button
               class="btn bg-dark text-white d-sm-block w-100"
               type="submit"
@@ -129,13 +129,13 @@ const props = defineProps({
     required: true,
   },
 });
-const emits = defineEmits(["update:modelValue", "submit", "reset"]);
+const emits = defineEmits(["update:modelValue", "submit"]);
 
 const { handleSubmit, errors, meta, resetForm } = useForm({
   validationSchema: TransactionFormSchema,
   initialValues: {
     title: props.modelValue.title || "",
-    paymentType: props.modelValue.paymentType || "",
+    payment_type: props.modelValue.payment_type || "",
     category: props.modelValue.category || "",
     value: props.modelValue.value || 0,
     description: props.modelValue.description || "",
@@ -154,8 +154,8 @@ const { value: description } = useField("description") as FieldContext<
 const { value: value } = useField("value") as FieldContext<
   TransactionFields["value"]
 >;
-const { value: paymentType } = useField("paymentType") as FieldContext<
-  TransactionFields["paymentType"]
+const { value: payment_type } = useField("payment_type") as FieldContext<
+  TransactionFields["payment_type"]
 >;
 const { value: category } = useField("category") as FieldContext<
   TransactionFields["category"]
@@ -163,7 +163,7 @@ const { value: category } = useField("category") as FieldContext<
 
 const computedTransactionFields = computed(() => ({
   title: title.value,
-  paymentType: paymentType.value,
+  payment_type: payment_type.value,
   category: category.value,
   value: value.value,
   description: description.value,
@@ -177,7 +177,7 @@ watch(
 );
 
 const onSubmit = handleSubmit(() => emits("submit"));
-const onReset = () => emits("reset", resetForm);
+const onReset = () => resetForm();
 
 const paymentTypeOptions = TRANSACTION_PAYMENT_TYPES;
 const paymentCategoryOptions = TRANSACTION_CATEGORIES;
