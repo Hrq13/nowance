@@ -8,13 +8,27 @@
       :expenses="expenses"
     />
   </section>
+
+  <button @click="modalVisibility = !modalVisibility">toggle modal</button>
+
+  <modal-bs-vue
+    v-model="modalVisibility"
+    title="Edit transaction"
+    :show-primary-button="false"
+    :show-secondary-button="false"
+    :closable="false"
+  >
+    <transaction-form v-model="transactionFormData" />
+  </modal-bs-vue>
 </template>
 
 <script setup lang="ts">
 import { useTransactionStore } from "@/stores/transaction/transactionStore";
 import TransactionTable from "@/components/transaction-table.vue";
+import modalBsVue from "@/components/modal-bs.vue";
+import transactionForm from "@/components/transaction-form/transaction-form.vue";
 import { ref } from "vue";
-import type { Transaction } from "@/types/transaction.types";
+import type { Transaction, TransactionFields } from "@/types/transaction.types";
 
 const transactionStore = useTransactionStore();
 
@@ -31,24 +45,13 @@ transactionStore.$onAction(({ name, after, store }) => {
 });
 
 transactionStore.fetchTransactions();
+
+const modalVisibility = ref(false);
+const transactionFormData = ref<TransactionFields>({
+  title: "",
+  payment_type: "",
+  category: "",
+  description: "",
+  value: 100,
+});
 </script>
-
-<style lang="scss" scoped>
-h1 {
-  display: inline-block;
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: rotate 3s linear infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-</style>
