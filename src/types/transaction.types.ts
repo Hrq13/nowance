@@ -23,7 +23,7 @@ export interface TransactionFields {
   value: number;
 }
 
-export type RawTransactionFromFirestore = Transaction & {
+export type RawFirestoreTransaction = Transaction & {
   created_at: Timestamp;
   updated_at: Timestamp;
   value: string;

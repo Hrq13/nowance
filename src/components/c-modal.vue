@@ -17,7 +17,7 @@
             <button
               type="button"
               class="btn-close"
-              data-bs-dismiss="modal"
+              @click="emits('update:modelValue', false)"
               aria-label="Close"
             ></button>
           </slot>
@@ -91,7 +91,11 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["clicked:primaryButton", "clicked:secondaryButton"]);
+const emits = defineEmits([
+  "update:modelValue",
+  "clicked:primaryButton",
+  "clicked:secondaryButton",
+]);
 
 const modalRef = ref<Element | null>(null);
 const modalInstance = ref<Modal | null>();

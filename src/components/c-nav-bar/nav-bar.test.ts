@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import router from "@/router";
 
-import NavBar from "./nav-bar.vue";
+import CNavBar from "./c-nav-bar.vue";
 import type { Link as NavBarLink } from "@/types/nav-bar.types";
 
 const mockLinks: NavBarLink[] = [
@@ -21,11 +21,11 @@ const mockLinks: NavBarLink[] = [
   },
 ];
 
-describe("NavBar", () => {
+describe("CNavBar", () => {
   let wrapper: VueWrapper;
 
   beforeEach(() => {
-    wrapper = mount(NavBar, {
+    wrapper = mount(CNavBar, {
       global: {
         plugins: [router],
       },

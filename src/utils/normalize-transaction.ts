@@ -1,11 +1,9 @@
 import type {
-  RawTransactionFromFirestore,
+  RawFirestoreTransaction,
   Transaction,
 } from "@/types/transaction.types";
 
-export default function (
-  rawTransaction: RawTransactionFromFirestore
-): Transaction {
+export default function (rawTransaction: RawFirestoreTransaction): Transaction {
   const normalizedTransaction: Transaction = {
     ...rawTransaction,
     created_at: rawTransaction.created_at.toMillis(),

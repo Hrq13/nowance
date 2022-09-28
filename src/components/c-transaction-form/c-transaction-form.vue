@@ -4,25 +4,22 @@
       <div class="col-12">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-6">
-            <label for="transactionTitle">Title</label>
-
-            <input
-              type="text"
-              class="form-control"
-              id="transactionTitle"
-              placeholder="groceries, medicine..."
+            <c-text-field
               v-model="title"
-            />
-
-            <span>{{ errors["title"] }}</span>
+              placeholder="Groceries, credit card..."
+              :error-message="errors['title']"
+              :is-validated="!errors['title'] && isUntouched"
+            >
+              Title
+            </c-text-field>
           </div>
 
           <div class="col-12 col-sm-6">
-            <label for="transactionType">Type</label>
+            <label for="transaction_type">Type</label>
 
-            <select-vue
+            <c-select
               v-model="payment_type"
-              id="transactionType"
+              id="transaction_type"
               :options="paymentTypeOptions"
               label="Select type"
               size="lg"
@@ -38,7 +35,7 @@
           <div class="col-12 col-sm-6">
             <label for="transactionCategory">Category</label>
 
-            <select-vue
+            <c-select
               v-model="category"
               id="transactionCategory"
               :options="paymentCategoryOptions"
@@ -52,7 +49,7 @@
           <div class="col-12 col-sm-6">
             <label for="transactionValue">Value</label>
 
-            <CurrencyInput
+            <c-currency-input
               class="form-control"
               id="transactionValue"
               placeholder="$123.45"
@@ -115,13 +112,13 @@ import { computed, watch, type PropType } from "vue";
 import { useField, useForm, type FieldContext } from "vee-validate";
 
 import type { TransactionFields } from "@/types/transaction.types";
-
 import TransactionFormSchema from "@/utils/validation/transaction-form-schema";
 
-import { TRANSACTION_CATEGORIES, TRANSACTION_PAYMENT_TYPES } from "./constants";
+import CCurrencyInput from "@/components/c-currency-input/c-currency-input.vue";
+import CSelect from "@/components/c-select.vue";
+import CTextField from "@/components/c-text-field.vue";
 
-import CurrencyInput from "@/components/currency-input/currency-input.vue";
-import SelectVue from "@/components/select-vue.vue";
+import { TRANSACTION_CATEGORIES, TRANSACTION_PAYMENT_TYPES } from "./constants";
 
 const props = defineProps({
   modelValue: {
@@ -129,9 +126,12 @@ const props = defineProps({
     required: true,
   },
 });
-const emits = defineEmits(["update:modelValue", "submit"]);
+const emits = defineEmits<{
+  (e: "update:modelValue", value: TransactionFields): void;
+  (e: "submit"): void;
+}>();
 
-const { handleSubmit, errors, meta, resetForm } = useForm({
+const { handleSubmit, errors, meta, resetForm, setValues, values } = useForm({
   validationSchema: TransactionFormSchema,
   initialValues: {
     title: props.modelValue.title || "",
@@ -161,20 +161,12 @@ const { value: category } = useField("category") as FieldContext<
   TransactionFields["category"]
 >;
 
-const computedTransactionFields = computed(() => ({
-  title: title.value,
-  payment_type: payment_type.value,
-  category: category.value,
-  value: value.value,
-  description: description.value,
-}));
 watch(
-  computedTransactionFields,
-  (value) => {
-    emits("update:modelValue", value);
-  },
+  values,
+  (values) => emits("update:modelValue", values as TransactionFields),
   { deep: true }
 );
+watch(props.modelValue, (newValues) => setValues(newValues), { deep: true });
 
 const onSubmit = handleSubmit(() => emits("submit"));
 const onReset = () => resetForm();

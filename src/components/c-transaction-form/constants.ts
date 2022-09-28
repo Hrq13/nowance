@@ -32,3 +32,9 @@ export const TRANSACTION_CATEGORIES: Array<PaymentCategoryOption> = [
     value: "travel",
   },
 ];
+
+export interface ExposeInterface {
+  hasErrors: boolean;
+  isUntouched: boolean;
+  resetForm: CallableFunction;
+}

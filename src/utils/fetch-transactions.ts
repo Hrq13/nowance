@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 
 import type {
-  RawTransactionFromFirestore,
+  RawFirestoreTransaction,
   Transaction,
 } from "@/types/transaction.types";
 import normalizeTransaction from "./normalize-transaction";
@@ -25,7 +25,7 @@ export async function fetchTransactionsOfRef(
         const parsedTransaction = normalizeTransaction({
           id: transaction.id,
           ...transaction.data(),
-        } as RawTransactionFromFirestore);
+        } as RawFirestoreTransaction);
 
         fetchedTransactions.push(parsedTransaction);
       });

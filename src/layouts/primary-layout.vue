@@ -1,6 +1,6 @@
 <template>
   <header>
-    <NavBar :links="navBarLinks" />
+    <c-nav-bar :links="navBarLinks" />
   </header>
 
   <main>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import NavBar from "@/components/nav-bar/nav-bar.vue";
+import CNavBar from "@/components/c-nav-bar/c-nav-bar.vue";
 import type { Link as NavBarLink } from "@/types/nav-bar.types";
 
 const navBarLinks: NavBarLink[] = [
